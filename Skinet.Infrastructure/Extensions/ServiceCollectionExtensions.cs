@@ -20,5 +20,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<ISkinetSeeder, SkinetSeeder>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     }
 }
