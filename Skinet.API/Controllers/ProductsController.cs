@@ -1,23 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
+using Skinet.API.RequestHelpers;
 using Skinet.Domain.Entities;
 using Skinet.Domain.Interfaces;
 using Skinet.Domain.Specification;
 
 namespace Skinet.API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ProductsController(IGenericRepository<Product> repository) : ControllerBase
+
+public class ProductsController(IGenericRepository<Product> repository) : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Product>>> GetAll(string? brand, string? type, string? sort)
+    public async Task<ActionResult<IReadOnlyList<Product>>> GetAll([FromQuery]ProductSpecParams specParams)
     {
 
-        var spec = new ProductSpecification(brand, type, sort);
+        var spec = new ProductSpecification(specParams);
 
-        var products = await repository.ListAsync(spec);
-
-        return Ok(products);
+        return await CreatePagedResult(repository, spec, specParams.PageIndex, specParams.PageSize);
     }
 
     [HttpGet("{id:int}")]
