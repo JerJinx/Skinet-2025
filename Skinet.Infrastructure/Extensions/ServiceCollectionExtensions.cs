@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Skinet.Domain.Interfaces;
 using Skinet.Infrastructure.Persistence;
+using Skinet.Infrastructure.Repositories;
+using Skinet.Infrastructure.Seeders;
 
 namespace Skinet.Infrastructure.Extensions;
 
@@ -14,5 +17,8 @@ public static class ServiceCollectionExtensions
         {
             opt.UseSqlServer(connectionString);
         });
+
+        services.AddScoped<ISkinetSeeder, SkinetSeeder>();
+        services.AddScoped<IProductRepository, ProductRepository>();
     }
 }
