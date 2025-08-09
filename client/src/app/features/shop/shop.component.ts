@@ -5,7 +5,6 @@ import { ProductItemComponent } from "./product-item/product-item.component";
 import { MatDialog } from "@angular/material/dialog";
 import { FiltersDailogComponent } from './filters-dailog/filters-dailog.component';
 import { MatButton } from '@angular/material/button';
-import { MatCard } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
@@ -17,7 +16,6 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-shop',
   imports: [
-    MatCard,
     ProductItemComponent,
     MatButton,
     MatIcon,
